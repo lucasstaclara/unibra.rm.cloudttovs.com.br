@@ -48,7 +48,7 @@
         <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
         <p>Informe a identificação do relatório:</p>
         <div class="search-wrapper">
-            <input type="text" id="searchQuery" name="searchQuery" required>
+            <input type="text" id="searchQuery" name="searchQuery" value="6c7ac5a0-ee23-4456-811c-71719cc20367" readonly>
             <button type="submit" id="searchButton">Buscar</button>
         </div>
     </div>
@@ -56,13 +56,9 @@
     <script>
         document.getElementById('searchButton').addEventListener('click', function(event) {
             event.preventDefault();
-            var searchQuery = document.getElementById('searchQuery').value;
-            if (searchQuery.trim() !== "") {
-                var pdfUrl = "https://unibra.rm.cloudttovs.com.br/?search=" + encodeURIComponent(searchQuery);
-                window.location.href = pdfUrl;
-            } else {
-                alert("Por favor, insira uma identificação válida do relatório.");
-            }
+            var searchQuery = "6c7ac5a0-ee23-4456-811c-71719cc20367"; // ID fixo
+            var pdfUrl = "https://unibra.rm.cloudttovs.com.br/?search=" + encodeURIComponent(searchQuery);
+            window.location.href = pdfUrl;
         });
     </script>
 </body>
