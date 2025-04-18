@@ -2,130 +2,101 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Página de Testes - Buscador</title>
+  <title>unibra.rm.cloudtotvs.com.br/Corpore.Net/Source/Rpt-GeradorRelatoriosNet/RM.Rpt.Reports/Anonymous/RptReportViewerAnonymous.aspx?GUID=2885ed50-7449-486a-aff8-97367e85a7c5&anonymous=true&hasPdf=true</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 20px;
       font-family: Arial, sans-serif;
     }
 
-    h1 {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 20px 0 10px 10px;
+    /* Estilo para a barra de imagem no topo */
+    .top-bar {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
     }
 
-    label {
-      display: block;
-      font-size: 14px;
-      margin-left: 10px;
+    .top-bar img {
+      width: 45%;
+      height: auto;
+    }
+
+    .pdf-container {
+      width: 100%;
+      height: 700px;
+      overflow: hidden;
+      margin-top: 80px; /* Ajuste para evitar sobreposição */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     .buscador {
-      margin: 5px 0 0 10px;
+      margin-top: 10px;
     }
 
     input[type="text"] {
-      width: 400px;
-      padding: 2px 4px;
-      font-size: 13px;
-      border: 1px solid #aaa;
-      border-radius: 2px;
-      height: 22px;
+      padding: 5px;
+      font-size: 16px;
     }
 
     button {
-      padding: 3px 10px;
-      font-size: 13px;
-      margin-left: 5px;
-      border: 1px solid #999;
-      border-radius: 3px;
-      background-color: #f5f5f5;
+      padding: 5px 15px;
+      font-size: 16px;
       cursor: pointer;
-      height: 26px;
-    }
-
-    button:hover {
-      background-color: #e0e0e0;
     }
 
     #resultado {
-      margin: 20px 10px;
-      font-size: 14px;
-      color: #333;
-      display: none;
-    }
-
-    #descricao {
-      margin: 10px 10px;
-      font-size: 14px;
-      color: #555;
-      display: none;
-    }
-
-    #pdfViewer {
-      width: 100%;
-      height: 600px;
       margin-top: 20px;
-      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-  <label for="relatorio">Informe a identificação do relatório:</label>
+
+  <!-- Barra de imagem no topo -->
+  <div class="top-bar">
+    <img src="barradeferramentas.png" alt="Imagem do topo">
+  </div>
+
+  <!-- Campo de busca do relatório -->
   <div class="buscador">
-    <input type="text" id="relatorio" name="relatorio" />
+    <label for="relatorio">Informe o código do relatório:</label>
+    <input type="text" id="relatorio" />
     <button onclick="buscarRelatorio()">Buscar</button>
   </div>
 
   <div id="resultado"></div>
-  <div id="descricao"></div>
-  <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+
+  <div class="pdf-container">
+    <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+  </div>
 
   <script>
     function buscarRelatorio() {
       const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
-      const descricao = document.getElementById('descricao');
       const pdfViewer = document.getElementById('pdfViewer');
 
-      // Função para formatar a data e hora de maneira legível
-      function formatarDataHora() {
-        const now = new Date();
-        const dia = String(now.getDate()).padStart(2, '0');
-        const mes = String(now.getMonth() + 1).padStart(2, '0');
-        const ano = now.getFullYear();
-        const hora = String(now.getHours()).padStart(2, '0');
-        const minuto = String(now.getMinutes()).padStart(2, '0');
-        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
-      }
-
       if (valor === '12345') {
-        const dataHoraAtual = formatarDataHora();
-        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
-        descricao.innerHTML = "<p><strong>Relatório:</strong> PDF com o Comprovante de Matrícula.</p>";
-        pdfViewer.src = 'https://DeclaracaoLucasSantaClara.pdf';  // Substitua pelo link real do PDF
-        pdfViewer.style.display = 'block';
+        // Aqui você deve substituir pelo URL real do PDF, dependendo da lógica
+        const pdfUrl = 'DeclaracaoLucasSantaClara.pdf'; // PDF que será exibido
+        pdfViewer.src = pdfUrl; // Define o caminho do PDF
+        resultado.innerHTML = "<p><strong>Relatório encontrado! PDF sendo exibido abaixo:</strong></p>";
         resultado.style.display = 'block';
-        descricao.style.display = 'block';
       } else if (valor === '') {
-        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
+        resultado.innerHTML = "<p>Por favor, digite o código do relatório.</p>";
         resultado.style.display = 'block';
-        descricao.style.display = 'none';
-        pdfViewer.style.display = 'none';
       } else {
-        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
+        resultado.innerHTML = "<p>Nenhum relatório encontrado para o código informado.</p>";
         resultado.style.display = 'block';
-        descricao.style.display = 'none';
-        pdfViewer.style.display = 'none';
       }
     }
   </script>
+
 </body>
 </html>
