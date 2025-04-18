@@ -90,9 +90,29 @@
       text-align: center;
       display: none;
     }
+
+    /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
+    .logo-fundo {
+      position: fixed; /* Fixa a imagem no fundo */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centraliza a imagem */
+      z-index: -1; /* Coloca atrás de outros elementos */
+      opacity: 0.1; /* Controla a transparência */
+    }
+
+    .logo-fundo img {
+      width: 300px; /* Tamanho da logo, ajuste conforme necessário */
+      height: auto;
+    }
   </style>
 </head>
 <body>
+  <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
+  <div class="logo-fundo">
+    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
+  </div>
+
   <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
   <label for="relatorio">Informe a identificação do relatório:</label>
   <div class="buscador">
