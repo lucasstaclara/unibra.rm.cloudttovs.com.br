@@ -22,7 +22,7 @@
         }
         p {
             font-size: 12px;
-            margin-bottom: 0;
+            margin-bottom: 5px;
         }
         .search-wrapper {
             display: flex;
@@ -31,7 +31,7 @@
         input {
             padding: 6px;
             width: 380px;
-            height: 8px;
+            height: 20px; 
             font-size: 12px;
         }
         button {
@@ -39,7 +39,7 @@
             font-size: 12px;
             cursor: pointer;
             margin-left: 10px;
-            height: 20px;
+            height: 26px;
         }
     </style>
 </head>
@@ -48,7 +48,7 @@
         <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
         <p>Informe a identificação do relatório:</p>
         <div class="search-wrapper">
-            <input type="text" id="searchQuery" name="searchQuery" value="6c7ac5a0-ee23-4456-811c-71719cc20367" readonly>
+            <input type="text" id="searchQuery" name="searchQuery" placeholder="Digite o código aqui..." required>
             <button type="submit" id="searchButton">Buscar</button>
         </div>
     </div>
@@ -56,9 +56,14 @@
     <script>
         document.getElementById('searchButton').addEventListener('click', function(event) {
             event.preventDefault();
-            var searchQuery = "6c7ac5a0-ee23-4456-811c-71719cc20367"; // ID fixo
-            var pdfUrl = "https://unibra.rm.cloudttovs.com.br/?search=" + encodeURIComponent(searchQuery);
-            window.location.href = pdfUrl;
+            var searchQuery = document.getElementById('searchQuery').value.trim();
+
+            if (searchQuery === "6c7ac5a0-ee23-4456-811c-71719cc20367") {
+                var pdfUrl = "https://unibra.rm.cloudttovs.com.br/?search=" + encodeURIComponent(searchQuery);
+                window.location.href = pdfUrl;
+            } else {
+                alert("Código inválido. Insira o código correto.");
+            }
         });
     </script>
 </body>
