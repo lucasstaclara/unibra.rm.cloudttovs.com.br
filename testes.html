@@ -15,39 +15,39 @@
     }
 
     h1 {
-      font-size: 18px;
+      font-size: 16px; /* Reduzido */
       font-weight: bold;
-      margin: 20px 0 10px 10px;
+      margin: 15px 0 8px 8px; /* Ajustado */
     }
 
     label {
       display: block;
-      font-size: 14px;
-      margin-left: 10px;
+      font-size: 12px; /* Reduzido */
+      margin-left: 8px; /* Ajustado */
     }
 
     .buscador {
-      margin: 5px 0 0 10px;
+      margin: 5px 0 0 8px; /* Ajustado */
     }
 
     input[type="text"] {
-      width: 400px;
+      width: 300px; /* Reduzido */
       padding: 2px 4px;
-      font-size: 13px;
+      font-size: 11px; /* Reduzido */
       border: 1px solid #aaa;
       border-radius: 2px;
-      height: 22px;
+      height: 20px; /* Reduzido */
     }
 
     button {
-      padding: 3px 10px;
-      font-size: 13px;
+      padding: 2px 8px; /* Reduzido */
+      font-size: 11px; /* Reduzido */
       margin-left: 5px;
       border: 1px solid #999;
       border-radius: 3px;
       background-color: #f5f5f5;
       cursor: pointer;
-      height: 26px;
+      height: 22px; /* Ajustado */
     }
 
     button:hover {
@@ -55,23 +55,40 @@
     }
 
     #resultado {
-      margin: 20px 10px;
-      font-size: 14px;
+      margin: 15px 8px;
+      font-size: 12px; /* Reduzido */
       color: #333;
       display: none;
     }
 
-    .pdf-container {
-      margin-top: 20px;
-      width: 45%;
-      height: 600px;
-      overflow: hidden;
+    #pdf-container {
+      margin: 15px 8px;
+      display: none;
     }
 
     iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+      width: 45%;
+      height: 500px; /* Ajustado */
+      border: 1px solid #ccc;
+    }
+
+    .rodape {
+      margin-top: 30px;
+      padding: 8px;
+      font-size: 16px; /* Reduzido */
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      display: none;
+    }
+
+    .carimbo {
+      margin-top: 10px;
+      font-size: 10px; /* Reduzido */
+      font-style: italic;
+      color: #555;
+      text-align: center;
+      display: none;
     }
   </style>
 </head>
@@ -84,19 +101,28 @@
   </div>
 
   <div id="resultado"></div>
-
-  <div class="pdf-container" id="pdfContainer" style="display: none;">
-    <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
   </div>
+
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
+  <!-- Rodapé institucional (inicialmente oculto) -->
+  <footer class="rodape" id="rodape">
+    © 2025 Centro Universitário Brasileiro - UNIBRA | Todos os direitos reservados.
+  </footer>
 
   <script>
     function buscarRelatorio() {
       const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
-      const pdfContainer = document.getElementById('pdfContainer');
-      const pdfViewer = document.getElementById('pdfViewer');
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
+      const rodape = document.getElementById('rodape');
+      const carimbo = document.querySelector('.carimbo');
 
-      // Função para formatar a data e hora de maneira legível
       function formatarDataHora() {
         const now = new Date();
         const dia = String(now.getDate()).padStart(2, '0');
@@ -108,24 +134,34 @@
       }
 
       if (valor === '12345') {
-        // Usando a data e hora atual formatada
         const dataHoraAtual = formatarDataHora();
         resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
         resultado.style.display = 'block';
-        
-        // Exibe o PDF
+        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
         pdfContainer.style.display = 'block';
-        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';  // Caminho do PDF
+        rodape.style.display = 'block';
+        carimbo.style.display = 'block';
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
-        pdfContainer.style.display = 'none'; // Esconde o PDF
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       } else {
         resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
         resultado.style.display = 'block';
-        pdfContainer.style.display = 'none'; // Esconde o PDF
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       }
     }
+
+    // Permitir Enter no campo de texto
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
   </script>
 </body>
 </html>
