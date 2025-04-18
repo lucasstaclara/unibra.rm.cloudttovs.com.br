@@ -77,9 +77,21 @@
       const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
 
+      // Função para formatar a data e hora de maneira legível
+      function formatarDataHora() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const ano = now.getFullYear();
+        const hora = String(now.getHours()).padStart(2, '0');
+        const minuto = String(now.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+      }
+
       if (valor === '12345') {
-        // Alteração feita na mensagem para remover o nome "Relatório" e o código
-        resultado.innerHTML = "<p><strong>Emissão concluída em 18/04/2025 às 14:30. Status: Aprovado.</strong></p>";
+        // Usando a data e hora atual formatada
+        const dataHoraAtual = formatarDataHora();
+        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
         resultado.style.display = 'block';
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
