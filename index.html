@@ -30,10 +30,10 @@
       margin-top: 80px; /* Ajuste para evitar sobreposição */
     }
 
-    iframe {
+    /* Estilo para garantir que o PDF será exibido corretamente */
+    object {
       width: 100%;
       height: 100%;
-      border: none;
     }
   </style>
 </head>
@@ -45,7 +45,10 @@
   </div>
 
   <div class="pdf-container">
-    <iframe src="declaracaolucas.pdf"></iframe>
+    <!-- Código para exibir o PDF -->
+    <object data="declaracaolucas.pdf" type="application/pdf" width="100%" height="100%">
+      <p>Seu navegador não suporta PDFs. <a href="declaracaolucas.pdf">Clique aqui para baixar.</a></p>
+    </object>
   </div>
 
 </body>
