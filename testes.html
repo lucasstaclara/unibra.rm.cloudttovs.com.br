@@ -77,7 +77,6 @@
       const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
 
-      // Exemplo: relatório 12345
       if (valor === '12345') {
         resultado.innerHTML = "<p><strong>Relatório 12345:</strong> Emissão concluída em 18/04/2025. Status: Aprovado.</p>";
         resultado.style.display = 'block';
@@ -85,7 +84,7 @@
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
       } else {
-        resultado.innerHTML = `<p>Relatório <strong>${valor}</strong> não encontrado.</p>`;
+        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
         resultado.style.display = 'block';
       }
     }
