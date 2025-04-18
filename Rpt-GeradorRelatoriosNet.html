@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Relatório</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input { padding: 10px; width: 300px; }
+        button { padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Busca de Relatório</h1>
+    <form id="searchForm">
+        <label for="searchQuery">Digite sua busca:</label>
+        <input type="text" id="searchQuery" name="searchQuery" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var searchQuery = document.getElementById('searchQuery').value;
+            var pdfUrl = "https://unibra.rm.cloudttovs.com.br?search=" + encodeURIComponent(searchQuery);
+            window.location.href = pdfUrl;
+        });
+    </script>
+</body>
+</html>
