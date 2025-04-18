@@ -78,7 +78,8 @@
       const resultado = document.getElementById('resultado');
 
       if (valor === '12345') {
-        resultado.innerHTML = "<p><strong>Relatório 12345:</strong> Emissão concluída em 18/04/2025. Status: Aprovado.</p>";
+        // Alteração feita na mensagem para remover o nome "Relatório" e o código
+        resultado.innerHTML = "<p><strong>Emissão concluída em 18/04/2025 às 14:30. Status: Aprovado.</strong></p>";
         resultado.style.display = 'block';
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
