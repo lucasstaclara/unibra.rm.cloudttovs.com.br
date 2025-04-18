@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Relatório</title>
+    <title>TOTVS - Certificado de Emissão de Relatórios</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        input { padding: 10px; width: 300px; }
-        button { padding: 10px; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-align: left;
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Busca de Relatório</h1>
-    <form id="searchForm">
-        <label for="searchQuery">Digite sua busca:</label>
-        <input type="text" id="searchQuery" name="searchQuery" required>
-        <button type="submit">Buscar</button>
-    </form>
+    <div class="container">
+        <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+        <p>Informe a identificação do relatório:</p>
+        <form id="searchForm">
+            <input type="text" id="searchQuery" name="searchQuery" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
