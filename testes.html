@@ -1,32 +1,137 @@
-<script>
-  function buscarRelatorio() {
-    const valor = document.getElementById('relatorio').value.trim();
-    const resultado = document.getElementById('resultado');
-    const pdfContainer = document.getElementById('pdf-container');
-    const pdfViewer = document.getElementById('pdf-viewer');
-    const rodape = document.getElementById('rodape');
-    const carimbo = document.querySelector('.carimbo');
-    const mensagemAguarde = document.getElementById('mensagem-aguarde');
-
-    // Mostrar mensagem de aguarde
-    mensagemAguarde.style.display = 'block';
-    resultado.style.display = 'none';
-    pdfContainer.style.display = 'none';
-    rodape.style.display = 'none';
-    carimbo.style.display = 'none';
-
-    function formatarDataHora() {
-      const now = new Date();
-      const dia = String(now.getDate()).padStart(2, '0');
-      const mes = String(now.getMonth() + 1).padStart(2, '0');
-      const ano = now.getFullYear();
-      const hora = String(now.getHours()).padStart(2, '0');
-      const minuto = String(now.getMinutes()).padStart(2, '0');
-      return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Página de Testes - Buscador</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    setTimeout(() => {
-      mensagemAguarde.style.display = 'none'; // Oculta a mensagem após simular carregamento
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 16px; /* Reduzido */
+      font-weight: bold;
+      margin: 15px 0 8px 8px; /* Ajustado */
+    }
+
+    label {
+      display: block;
+      font-size: 12px; /* Reduzido */
+      margin-left: 8px; /* Ajustado */
+    }
+
+    .buscador {
+      margin: 5px 0 0 8px; /* Ajustado */
+    }
+
+    input[type="text"] {
+      width: 300px; /* Reduzido */
+      padding: 2px 4px;
+      font-size: 11px; /* Reduzido */
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      height: 20px; /* Reduzido */
+    }
+
+    button {
+      padding: 2px 8px; /* Reduzido */
+      font-size: 11px; /* Reduzido */
+      margin-left: 5px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      height: 22px; /* Ajustado */
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    #resultado {
+      margin: 15px 8px;
+      font-size: 12px; /* Reduzido */
+      color: #333;
+      display: none;
+    }
+
+    #pdf-container {
+      margin: 15px 8px;
+      display: none;
+    }
+
+    iframe {
+      width: 45%;
+      height: 500px; /* Ajustado */
+      border: 1px solid #ccc;
+    }
+
+    .rodape {
+      margin-top: 30px;
+      padding: 8px;
+      font-size: 16px; /* Reduzido */
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      display: none;
+    }
+
+    .carimbo {
+      margin-top: 10px;
+      font-size: 10px; /* Reduzido */
+      font-style: italic;
+      color: #555;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+  <label for="relatorio">Informe a identificação do relatório:</label>
+  <div class="buscador">
+    <input type="text" id="relatorio" name="relatorio" />
+    <button onclick="buscarRelatorio()">Buscar</button>
+  </div>
+
+  <div id="resultado"></div>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
+  </div>
+
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
+  <!-- Rodapé institucional (inicialmente oculto) -->
+  <footer class="rodape" id="rodape">
+    © 2025 Centro Universitário Brasileiro - UNIBRA | Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function buscarRelatorio() {
+      const valor = document.getElementById('relatorio').value.trim();
+      const resultado = document.getElementById('resultado');
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
+      const rodape = document.getElementById('rodape');
+      const carimbo = document.querySelector('.carimbo');
+
+      function formatarDataHora() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const ano = now.getFullYear();
+        const hora = String(now.getHours()).padStart(2, '0');
+        const minuto = String(now.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+      }
 
       if (valor === '12345') {
         const dataHoraAtual = formatarDataHora();
@@ -39,17 +144,24 @@
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       } else {
         resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
         resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       }
-    }, 1000); // Simula um pequeno tempo de carregamento (1 segundo)
-  }
-
-  // Permitir Enter no campo de texto
-  document.getElementById('relatorio').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      buscarRelatorio();
     }
-  });
-</script>
+
+    // Permitir Enter no campo de texto
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
+  </script>
+</body>
+</html>
