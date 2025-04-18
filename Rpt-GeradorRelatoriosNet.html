@@ -20,36 +20,34 @@
             font-size: 16px;
             margin-bottom: 5px;
         }
-        .search-wrapper {
-            display: flex;
-            align-items: center;
-        }
-        label {
+        p {
             font-size: 12px;
-            margin-right: 5px;
+            margin-bottom: 2px; /* Mantém o espaço compacto entre o texto e o campo de busca */
         }
         input {
             padding: 6px;
             width: 200px;
             height: 40px;
             font-size: 12px;
+            display: block; /* Garante que o input fique abaixo do texto */
         }
         button {
             padding: 6px;
             font-size: 12px;
             cursor: pointer;
             margin-left: 5px;
+            margin-top: 5px; /* Adiciona um pequeno espaçamento entre a barra e o botão */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-        <div class="search-wrapper">
-            <label for="searchQuery">Informe a identificação do relatório:</label>
+        <p>Informe a identificação do relatório:</p>
+        <form id="searchForm">
             <input type="text" id="searchQuery" name="searchQuery" required>
             <button type="submit">Buscar</button>
-        </div>
+        </form>
     </div>
 
     <script>
