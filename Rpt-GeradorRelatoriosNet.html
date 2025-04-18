@@ -24,18 +24,22 @@
             font-size: 12px;
             margin-bottom: 0; /* Removendo o espaçamento para colar ao input */
         }
+        .search-wrapper {
+            display: flex;
+            align-items: center; /* Alinha verticalmente */
+        }
         input {
             padding: 6px;
             width: 380px;
             height: 8px;
             font-size: 12px;
-            display: block;
         }
         button {
             padding: 6px;
             font-size: 12px;
             cursor: pointer;
-            margin-left: 5px;
+            margin-left: 10px; /* Espaço entre o input e o botão */
+            height: 20px; /* Mantém o alinhamento com o input */
         }
     </style>
 </head>
@@ -43,10 +47,10 @@
     <div class="container">
         <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
         <p>Informe a identificação do relatório:</p>
-        <form id="searchForm">
+        <div class="search-wrapper">
             <input type="text" id="searchQuery" name="searchQuery" required>
             <button type="submit">Buscar</button>
-        </form>
+        </div>
     </div>
 
     <script>
