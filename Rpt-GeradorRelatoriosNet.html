@@ -22,11 +22,11 @@
         }
         p {
             font-size: 12px;
-            margin-bottom: 0; /* Removendo o espaçamento para colar ao input */
+            margin-bottom: 0;
         }
         .search-wrapper {
             display: flex;
-            align-items: center; /* Alinha verticalmente */
+            align-items: center;
         }
         input {
             padding: 6px;
@@ -38,8 +38,8 @@
             padding: 6px;
             font-size: 12px;
             cursor: pointer;
-            margin-left: 10px; /* Espaço entre o input e o botão */
-            height: 20px; /* Mantém o alinhamento com o input */
+            margin-left: 10px;
+            height: 20px;
         }
     </style>
 </head>
@@ -49,16 +49,20 @@
         <p>Informe a identificação do relatório:</p>
         <div class="search-wrapper">
             <input type="text" id="searchQuery" name="searchQuery" required>
-            <button type="submit">Buscar</button>
+            <button type="submit" id="searchButton">Buscar</button>
         </div>
     </div>
 
     <script>
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
+        document.getElementById('searchButton').addEventListener('click', function(event) {
             event.preventDefault();
             var searchQuery = document.getElementById('searchQuery').value;
-            var pdfUrl = "https://unibra.rm.cloudttovs.com.br?search=" + encodeURIComponent(searchQuery);
-            window.location.href = pdfUrl;
+            if (searchQuery.trim() !== "") {
+                var pdfUrl = "https://unibra.rm.cloudttovs.com.br/?search=" + encodeURIComponent(searchQuery);
+                window.location.href = pdfUrl;
+            } else {
+                alert("Por favor, insira uma identificação válida do relatório.");
+            }
         });
     </script>
 </body>
