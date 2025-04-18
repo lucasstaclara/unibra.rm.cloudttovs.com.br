@@ -81,6 +81,15 @@
       border-top: 1px solid #ddd;
       display: none;
     }
+
+    .carimbo {
+      margin-top: 10px;
+      font-size: 12px;
+      font-style: italic;
+      color: #555;
+      text-align: center;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -96,6 +105,10 @@
     <iframe id="pdf-viewer" src=""></iframe>
   </div>
 
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
   <!-- Rodapé institucional (inicialmente oculto) -->
   <footer class="rodape" id="rodape">
     © 2025 Centro Universitário Brasileiro - UNIBRA | Todos os direitos reservados.
@@ -108,6 +121,7 @@
       const pdfContainer = document.getElementById('pdf-container');
       const pdfViewer = document.getElementById('pdf-viewer');
       const rodape = document.getElementById('rodape');
+      const carimbo = document.querySelector('.carimbo');
 
       function formatarDataHora() {
         const now = new Date();
@@ -125,17 +139,20 @@
         resultado.style.display = 'block';
         pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
         pdfContainer.style.display = 'block';
-        rodape.style.display = 'block'; // Exibe o rodapé
+        rodape.style.display = 'block';
+        carimbo.style.display = 'block';
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
         pdfContainer.style.display = 'none';
         rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       } else {
         resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
         resultado.style.display = 'block';
         pdfContainer.style.display = 'none';
         rodape.style.display = 'none';
+        carimbo.style.display = 'none';
       }
     }
 
