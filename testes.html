@@ -32,11 +32,11 @@
 
     input[type="text"] {
       width: 400px;
-      padding: 2px 4px; /* menor altura */
-      font-size: 13px;   /* tamanho de texto ajustado */
+      padding: 2px 4px;
+      font-size: 13px;
       border: 1px solid #aaa;
       border-radius: 2px;
-      height: 22px; /* força a altura menor */
+      height: 22px;
     }
 
     button {
@@ -53,6 +53,13 @@
     button:hover {
       background-color: #e0e0e0;
     }
+
+    #resultado {
+      margin: 20px 10px;
+      font-size: 14px;
+      color: #333;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -60,7 +67,28 @@
   <label for="relatorio">Informe a identificação do relatório:</label>
   <div class="buscador">
     <input type="text" id="relatorio" name="relatorio" />
-    <button>Buscar</button>
+    <button onclick="buscarRelatorio()">Buscar</button>
   </div>
+
+  <div id="resultado"></div>
+
+  <script>
+    function buscarRelatorio() {
+      const valor = document.getElementById('relatorio').value.trim();
+      const resultado = document.getElementById('resultado');
+
+      // Exemplo: relatório 12345
+      if (valor === '12345') {
+        resultado.innerHTML = "<p><strong>Relatório 12345:</strong> Emissão concluída em 18/04/2025. Status: Aprovado.</p>";
+        resultado.style.display = 'block';
+      } else if (valor === '') {
+        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
+        resultado.style.display = 'block';
+      } else {
+        resultado.innerHTML = `<p>Relatório <strong>${valor}</strong> não encontrado.</p>`;
+        resultado.style.display = 'block';
+      }
+    }
+  </script>
 </body>
 </html>
