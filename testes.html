@@ -61,17 +61,15 @@
       display: none;
     }
 
-    .pdf-container {
-      margin-top: 20px;
-      width: 45%;
-      height: 600px;
-      overflow: hidden;
+    #pdf-container {
+      margin: 20px 10px;
+      display: none;
     }
 
     iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+      width: 90%;
+      height: 600px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
@@ -84,19 +82,17 @@
   </div>
 
   <div id="resultado"></div>
-
-  <div class="pdf-container" id="pdfContainer" style="display: none;">
-    <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
   </div>
 
   <script>
     function buscarRelatorio() {
       const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
-      const pdfContainer = document.getElementById('pdfContainer');
-      const pdfViewer = document.getElementById('pdfViewer');
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
 
-      // Função para formatar a data e hora de maneira legível
       function formatarDataHora() {
         const now = new Date();
         const dia = String(now.getDate()).padStart(2, '0');
@@ -108,24 +104,28 @@
       }
 
       if (valor === '12345') {
-        // Usando a data e hora atual formatada
         const dataHoraAtual = formatarDataHora();
         resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
         resultado.style.display = 'block';
-        
-        // Exibe o PDF
+        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
         pdfContainer.style.display = 'block';
-        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';  // Caminho do PDF
       } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
-        pdfContainer.style.display = 'none'; // Esconde o PDF
+        pdfContainer.style.display = 'none';
       } else {
         resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
         resultado.style.display = 'block';
-        pdfContainer.style.display = 'none'; // Esconde o PDF
+        pdfContainer.style.display = 'none';
       }
     }
+
+    // Permitir Enter no campo de texto
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
   </script>
 </body>
 </html>
