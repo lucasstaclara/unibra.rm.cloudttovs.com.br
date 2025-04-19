@@ -1,192 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Página de Testes - Buscador</title>
-
-  <!-- Favicon -->
-   <link rel="shortcut icon" href="favicon.ico" />
-
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    h1 {
-      font-size: 14px;
-      font-weight: bold;
-      margin: 15px 0 8px 8px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      margin-left: 8px;
-    }
-
-    .buscador {
-      margin: 5px 0 0 8px;
-    }
-
-    input[type="text"] {
-      width: 400px;
-      padding: 2px 4px;
-      font-size: 11px;
-      border: 1px solid #aaa;
-      border-radius: 2px;
-      height: 20px;
-    }
-
-    button {
-      padding: 2px 8px;
-      font-size: 11px;
-      margin-left: 5px;
-      border: 1px solid #999;
-      border-radius: 3px;
-      background-color: #f5f5f5;
-      cursor: pointer;
-      height: 22px;
-    }
-
-    button:hover {
-      background-color: #e0e0e0;
-    }
-
-    #resultado {
-      margin: 15px 8px;
-      font-size: 12px;
-      color: #333;
-      display: none;
-    }
-
-    #pdf-container {
-      margin: 15px 8px 60px 8px;
-      display: none;
-    }
-
-    iframe {
-      width: 45%;
-      height: 800px;
-      border: 1px solid #ccc;
-      margin-bottom: 60px;
-    }
-
-    .rodape {
-      margin-top: 30px;
-      padding: 8px;
-      font-size: 16px;
-      color: #777;
-      text-align: center;
-      border-top: 1px solid #ddd;
-      display: none;
-    }
-
-    .carimbo {
-      margin-top: 10px;
-      font-size: 10px;
-      font-style: italic;
-      color: #555;
-      text-align: center;
-      display: none;
-    }
-
-    .logo-fundo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      opacity: 0.5;
-    }
-
-    .logo-fundo img {
-      width: 500px;
-      height: auto;
-    }
-  </style>
+  <title>UNIBRA Loader</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="logo-fundo">
-    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
+  <div class="loader">
+    <img src="LOGOUNIBRA1.png" alt="Logo UNIBRA" class="logo">
   </div>
 
-  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-
-  <label for="relatorio">Informe a identificação do relatório:</label>
-  <div class="buscador">
-    <input type="text" id="relatorio" name="relatorio" />
-    <button onclick="buscarRelatorio()">Buscar</button>
+  <div class="conteudo">
+    <h1>Bem-vindo ao site da UNIBRA</h1>
+    <p>Conteúdo da página carregado com sucesso.</p>
   </div>
 
-  <div id="resultado"></div>
-
-  <div id="pdf-container">
-    <iframe id="pdf-viewer" src=""></iframe>
-  </div>
-
-  <div class="carimbo">
-    Documento gerado automaticamente em ambiente seguro.
-  </div>
-
-  <footer class="rodape" id="rodape">
-    UNIBRA 2025 © Todos os direitos reservados.
-  </footer>
-
-  <script>
-    function buscarRelatorio() {
-      const valor = document.getElementById('relatorio').value.trim();
-      const resultado = document.getElementById('resultado');
-      const pdfContainer = document.getElementById('pdf-container');
-      const pdfViewer = document.getElementById('pdf-viewer');
-      const rodape = document.getElementById('rodape');
-      const carimbo = document.querySelector('.carimbo');
-
-      function formatarDataHora() {
-        const now = new Date();
-        const dia = String(now.getDate()).padStart(2, '0');
-        const mes = String(now.getMonth() + 1).padStart(2, '0');
-        const ano = now.getFullYear();
-        const hora = String(now.getHours()).padStart(2, '0');
-        const minuto = String(now.getMinutes()).padStart(2, '0');
-        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
-      }
-
-      if (valor === '12345') {
-        const dataHoraAtual = formatarDataHora();
-        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
-        resultado.style.display = 'block';
-        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
-        pdfContainer.style.display = 'block';
-        rodape.style.display = 'block';
-        carimbo.style.display = 'block';
-      } else if (valor === '') {
-        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
-        resultado.style.display = 'block';
-        pdfContainer.style.display = 'none';
-        rodape.style.display = 'none';
-        carimbo.style.display = 'none';
-      } else {
-        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
-        resultado.style.display = 'block';
-        pdfContainer.style.display = 'none';
-        rodape.style.display = 'none';
-        carimbo.style.display = 'none';
-      }
-    }
-
-    document.getElementById('relatorio').addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        buscarRelatorio();
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
