@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Página de Testes - Buscador</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://lucasstaclara.github.io/favicon/favicon.png">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 14px; /* Reduzido */
+      font-weight: bold;
+      margin: 15px 0 8px 8px; /* Ajustado */
+    }
+
+    label {
+      display: block;
+      font-size: 12px; /* Reduzido */
+      margin-left: 8px; /* Ajustado */
+    }
+
+    .buscador {
+      margin: 5px 0 0 8px; /* Ajustado */
+    }
+
+    input[type="text"] {
+      width: 400px; /* Reduzido */
+      padding: 2px 4px;
+      font-size: 11px; /* Reduzido */
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      height: 20px; /* Reduzido */
+    }
+
+    button {
+      padding: 2px 8px; /* Reduzido */
+      font-size: 11px; /* Reduzido */
+      margin-left: 5px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      height: 22px; /* Ajustado */
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    #resultado {
+      margin: 15px 8px;
+      font-size: 12px; /* Reduzido */
+      color: #333;
+      display: none;
+    }
+
+    #pdf-container {
+      margin: 15px 8px 60px 8px; /* Aumentada margem inferior para não sobrepor */
+      display: none;
+    }
+
+    iframe {
+      width: 45%;
+      height: 800px; /* Ajustado */
+      border: 1px solid #ccc;
+      margin-bottom: 60px; /* Adicionado para garantir espaço abaixo do PDF */
+    }
+
+    .rodape {
+      margin-top: 30px;
+      padding: 8px;
+      font-size: 16px; /* Reduzido */
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      display: none;
+    }
+
+    .carimbo {
+      margin-top: 10px;
+      font-size: 10px; /* Reduzido */
+      font-style: italic;
+      color: #555;
+      text-align: center;
+      display: none;
+    }
+
+    /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
+    .logo-fundo {
+      position: fixed; /* Fixa a imagem no fundo */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centraliza a imagem */
+      z-index: -1; /* Coloca atrás de outros elementos */
+      opacity: 0.5; /* Controla a transparência */
+    }
+
+    .logo-fundo img {
+      width: 500px; /* Tamanho da logo, ajuste conforme necessário */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
+  <div class="logo-fundo">
+    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
+  </div>
+
+  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+  <label for="relatorio">Informe a identificação do relatório:</label>
+  <div class="buscador">
+    <input type="text" id="relatorio" name="relatorio" />
+    <button onclick="buscarRelatorio()">Buscar</button>
+  </div>
+
+  <div id="resultado"></div>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
+  </div>
+
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
+  <!-- Rodapé institucional (inicialmente oculto) -->
+  <footer class="rodape" id="rodape">
+    UNIBRA 2025 © Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function buscarRelatorio() {
+      const valor = document.getElementById('relatorio').value.trim();
+      const resultado = document.getElementById('resultado');
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
+      const rodape = document.getElementById('rodape');
+      const carimbo = document.querySelector('.carimbo');
+
+      function formatarDataHora() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const ano = now.getFullYear();
+        const hora = String(now.getHours()).padStart(2, '0');
+        const minuto = String(now.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+      }
+
+      if (valor === '12345') {
+        const dataHoraAtual = formatarDataHora();
+        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
+        resultado.style.display = 'block';
+        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
+        pdfContainer.style.display = 'block';
+        rodape.style.display = 'block';
+        carimbo.style.display = 'block';
+      } else if (valor === '') {
+        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
+        resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
+      } else {
+        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
+        resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
+      }
+    }
+
+    // Permitir Enter no campo de texto
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
+  </script>
+</body>
+</html>
