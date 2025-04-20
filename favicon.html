@@ -1,55 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>TOTVS - Certificado de Emissão de Relatórios</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    label, input, button {
-      font-size: 12px;
-    }
-    table {
-      width: 45%;
-      border-collapse: collapse;
-      font-size: 9px;
-      margin-top: 10px;
-    }
-    th, td {
-      border: 1px solid #aaa;
-      padding: 1px 3px;
-      text-align: left;
-    }
-    th {
-      background-color: #ddd;
-    }
-    a {
-      font-size: 9px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>TOTVS - Certificado de Emissão de Relatórios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            width: 60%;
+            padding: 5px;
+        }
+        .search-bar button {
+            padding: 5px 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            display: none;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .visualizar-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-  <label for="relatorio">Informe a identificação do relatório:</label>
-  <input type="text" id="relatorio" name="relatorio" value="2885ed50-7449-486a-aff8-97367e85a7c5">
-  <button>Buscar</button>
-  <table>
-    <tr>
-      <th style="width: 25%;">Identificação</th>
-      <th style="width: 50%;">Descrição</th>
-      <th style="width: 25%;">Data de Criação</th>
-    </tr>
-    <tr>
-      <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
-      <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-      <td>15/04/2025 08:49:31 <a href="#">Visualizar</a></td>
-    </tr>
-  </table>
+    <div class="container">
+        <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+        <div class="search-bar">
+            <label for="report-id">Informe a identificação do relatório:</label>
+            <input type="text" id="report-id">
+            <button onclick="buscarRelatorio()">Buscar</button>
+        </div>
+        <table id="report-table">
+            <thead>
+                <tr>
+                    <th>Identificação</th>
+                    <th>Descrição</th>
+                    <th>Data de Criação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="identificacao"></td>
+                    <td id="descricao"></td>
+                    <td id="data-criacao"></td>
+                    <td><span class="visualizar-link">Visualizar</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function buscarRelatorio() {
+            const reportId = document.getElementById('report-id').value;
+            if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+                document.getElementById('identificacao').textContent = '2885ed50-7449-486a-aff8-97367e85a7c5';
+                document.getElementById('descricao').textContent = 'UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE';
+                document.getElementById('data-criacao').textContent = '15/04/2025 08:49:31';
+                document.getElementById('report-table').style.display = 'table';
+            } else {
+                alert('Relatório não encontrado.');
+            }
+        }
+    </script>
 </body>
 </html>
