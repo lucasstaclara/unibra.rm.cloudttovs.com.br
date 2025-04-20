@@ -6,16 +6,12 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 20px;
     }
 
     .container {
-      padding: 20px;
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
+      max-width: 600px;
     }
 
     h1 {
@@ -23,50 +19,39 @@
       margin-bottom: 10px;
     }
 
-    label, input, button {
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
       font-size: 12px;
+      display: block;
+      margin-bottom: 5px;
     }
 
-    table {
-      width: 45%;
-      border-collapse: collapse;
-      font-size: 9px;
-      margin-top: 10px;
+    input {
+      font-size: 12px;
+      padding: 5px;
+      width: 250px;
     }
 
-    th, td {
-      border: 1px solid #aaa;
-      padding: 1px 3px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #ddd;
-    }
-
-    a {
-      font-size: 9px;
+    button {
+      font-size: 12px;
+      padding: 5px 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+
     <label for="relatorio">Informe a identificação do relatório:</label>
-    <input type="text" id="relatorio" name="relatorio" value="2885ed50-7449-486a-aff8-97367e85a7c5">
-    <button>Buscar</button>
-    <table>
-      <tr>
-        <th style="width: 25%;">Identificação</th>
-        <th style="width: 50%;">Descrição</th>
-        <th style="width: 25%;">Data de Criação</th>
-      </tr>
-      <tr>
-        <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
-        <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-        <td>15/04/2025 08:49:31 <a href="#">Visualizar</a></td>
-      </tr>
-    </table>
+    <div class="search-bar">
+      <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
+      <button>Buscar</button>
+    </div>
   </div>
 </body>
 </html>
