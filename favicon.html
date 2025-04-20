@@ -38,34 +38,39 @@
       padding: 5px;
       width: 360px;
       height: 6px;
-      
-      
     }
 
     button {
-      padding: 2px 8px; /* Reduzido */
-      font-size: 11px; /* Reduzido */
+      padding: 2px 8px;
+      font-size: 11px;
       margin-left: 0px;
       border: 1px solid #999;
       border-radius: 3px;
       background-color: #f5f5f5;
       cursor: pointer;
-      height: 22px; /* Ajustado */
+      height: 22px;
+    }
+
+    #mensagem-erro {
+      color: red;
+      font-size: 10px;
+      margin-top: 5px;
+      display: none; /* Inicialmente oculto */
     }
 
     table {
-      width: 500px; /* Diminuí a largura da tabela */
+      width: 500px;
       border-collapse: collapse;
-      font-size: 9px; /* Reduzi o tamanho da fonte */
+      font-size: 9px;
       margin-top: 10px;
       display: none;
     }
 
     th, td {
       border: 1px solid #aaa;
-      padding: 2px; /* Reduzi o padding para diminuir as células */
-      text-align: center; /* Centralizando o texto */
-      white-space: nowrap; /* Impedindo que as informações quebrem */
+      padding: 2px;
+      text-align: center;
+      white-space: nowrap;
     }
 
     th {
@@ -81,8 +86,9 @@
     <div class="search-bar">
       <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
       <button onclick="buscarRelatorio()">Buscar</button>
-      
     </div>
+
+    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div> <!-- Mensagem de erro -->
 
     <table id="report-table">
       <tr>
@@ -101,10 +107,15 @@
   <script>
     function buscarRelatorio() {
       const reportId = document.getElementById('relatorio').value;
+      const mensagemErro = document.getElementById('mensagem-erro');
+      const tabela = document.getElementById('report-table');
+
       if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
-        document.getElementById('report-table').style.display = 'table';
+        tabela.style.display = 'table';
+        mensagemErro.style.display = 'none'; // Oculta a mensagem de erro
       } else {
-        alert('Relatório não encontrado.');
+        tabela.style.display = 'none'; // Oculta a tabela
+        mensagemErro.style.display = 'block'; // Exibe a mensagem de erro abaixo da barra de pesquisa
       }
     }
   </script>
