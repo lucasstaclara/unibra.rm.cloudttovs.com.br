@@ -59,10 +59,10 @@
     }
 
     #loading {
-      display: none;
       font-size: 10px;
       color: #333;
       margin-top: 5px;
+      display: none;
     }
 
     table {
@@ -88,15 +88,15 @@
 <body>
   <div class="container">
     <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-    
+
     <label for="relatorio">Informe a identificação do relatório:</label>
     <div class="search-bar">
       <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
       <button onclick="buscarRelatorio()">Buscar</button>
     </div>
 
-    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
     <div id="loading">Carregando relatório...</div>
+    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
 
     <table id="report-table">
       <tr>
@@ -119,25 +119,35 @@
       const tabela = document.getElementById('report-table');
       const loading = document.getElementById('loading');
 
-      // Oculta mensagens e tabela antes do loading
       mensagemErro.style.display = 'none';
       tabela.style.display = 'none';
-
-      // Mostra o loading
       loading.style.display = 'block';
 
-      // Simula carregamento com delay (ex: 1,5 segundos)
+      // Simula carregamento e "salva" o código no localStorage
       setTimeout(() => {
-        loading.style.display = 'none'; // Esconde o loading após o "carregamento"
+        localStorage.setItem('reportBuscado', reportId);
+        location.reload(); // Recarrega a página
+      }, 1500); // 1.5s de espera para efeito de loading
+    }
 
+    // Quando a página recarregar
+    window.onload = function () {
+      const reportId = localStorage.getItem('reportBuscado');
+      const tabela = document.getElementById('report-table');
+      const mensagemErro = document.getElementById('mensagem-erro');
+      const loading = document.getElementById('loading');
+
+      if (reportId) {
+        loading.style.display = 'none';
         if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
           tabela.style.display = 'table';
-          mensagemErro.style.display = 'none';
         } else {
-          tabela.style.display = 'none';
           mensagemErro.style.display = 'block';
         }
-      }, 1500); // 1.5 segundos de "carregamento"
+
+        // Limpa o localStorage após o uso
+        localStorage.removeItem('reportBuscado');
+      }
     }
   </script>
 </body>
