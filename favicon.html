@@ -2,48 +2,50 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>TOTVS - Certificado de Emissão de Relatórios</title>
+  <title>UNIBRA - Certificado de Emissão de Relatórios</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    .container {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    body {
+      font-family: Arial, sans-serif;
     }
 
     h1 {
       font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      font-weight: bold;
+      margin: 15px 0 8px 8px;
     }
 
     label {
-      font-size: 12px;
       display: block;
-      margin-bottom: 3px;
+      font-size: 12px;
+      margin-left: 8px;
     }
 
-    input {
-      font-size: 12px;
-      padding: 5px;
+    .buscador {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 8px;
+    }
+
+    input[type="text"] {
       width: 360px;
-      height: 6px;
+      padding: 5px;
+      font-size: 11px;
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      height: 20px;
     }
 
     button {
       padding: 2px 8px;
       font-size: 11px;
-      margin-left: 0px;
       border: 1px solid #999;
       border-radius: 3px;
       background-color: #f5f5f5;
@@ -51,11 +53,16 @@
       height: 22px;
     }
 
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
     #mensagem-erro {
       color: red;
       font-size: 10px;
+      margin-left: 8px;
       margin-top: 5px;
-      display: none; /* Inicialmente oculto */
+      display: none;
     }
 
     table {
@@ -79,30 +86,32 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-    
-    <label for="relatorio">Informe a identificação do relatório:</label>
-    <div class="search-bar">
-      <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
-      <button onclick="buscarRelatorio()">Buscar</button>
-    </div>
-
-    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div> <!-- Mensagem de erro -->
-
-    <table id="report-table">
-      <tr>
-        <th style="width: 30%;">Identificação</th>
-        <th style="width: 50%;">Descrição</th>
-        <th style="width: 20%;">Data de Criação</th>
-      </tr>
-      <tr>
-        <td id="identificacao">2885ed50-7449-486a-aff8-97367e85a7c1</td>
-        <td id="descricao">UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-        <td id="data-criacao">17/04/2025 19:21:56</td>
-      </tr>
-    </table>
+  <div class="logo-fundo">
+    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
   </div>
+
+  <h1>UNIBRA - Certificado de Emissão de Relatórios</h1>
+
+  <label for="relatorio">Informe a identificação do relatório:</label>
+  <div class="buscador">
+    <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
+    <button onclick="buscarRelatorio()">Buscar</button>
+  </div>
+
+  <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
+
+  <table id="report-table">
+    <tr>
+      <th style="width: 30%;">Identificação</th>
+      <th style="width: 50%;">Descrição</th>
+      <th style="width: 20%;">Data de Criação</th>
+    </tr>
+    <tr>
+      <td id="identificacao">2885ed50-7449-486a-aff8-97367e85a7c5</td>
+      <td id="descricao">UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+      <td id="data-criacao">15/04/2025 08:49:31</td>
+    </tr>
+  </table>
 
   <script>
     function buscarRelatorio() {
@@ -110,14 +119,20 @@
       const mensagemErro = document.getElementById('mensagem-erro');
       const tabela = document.getElementById('report-table');
 
-      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c1') {
+      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
         tabela.style.display = 'table';
-        mensagemErro.style.display = 'none'; // Oculta a mensagem de erro
+        mensagemErro.style.display = 'none';
       } else {
-        tabela.style.display = 'none'; // Oculta a tabela
-        mensagemErro.style.display = 'block'; // Exibe a mensagem de erro abaixo da barra de pesquisa
+        tabela.style.display = 'none';
+        mensagemErro.style.display = 'block';
       }
     }
+
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
   </script>
 </body>
 </html>
