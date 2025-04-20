@@ -1,75 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>TOTVS - Certificado de Emissão de Relatórios</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      height: 100vh; /* Garantir que a altura da tela ocupe 100% */
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .container {
-      padding: 20px;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    h1 {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    label, input, button {
-      font-size: 12px;
-    }
-
-    table {
-      width: 45%;
-      border-collapse: collapse;
-      font-size: 9px;
-      margin-top: 10px;
-    }
-
-    th, td {
-      border: 1px solid #aaa;
-      padding: 1px 3px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #ddd;
-    }
-
-    a {
-      font-size: 9px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 595px;
+            height: 842px;
+            margin: 20px auto;
+            padding: 40px;
+            border: 1px solid #ccc;
+        }
+        
+        .header {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #1f3d7a;
+        }
+        
+        .content {
+            margin: 20px 0;
+        }
+        
+        .campo {
+            margin: 15px 0;
+        }
+        
+        .identificacao {
+            font-weight: bold;
+            margin: 25px 0;
+            font-size: 14px;
+        }
+        
+        .detalhes {
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-    <label for="relatorio">Informe a identificação do relatório:</label>
-    <input type="text" id="relatorio" name="relatorio" value="2885ed50-7449-486a-aff8-97367e85a7c5">
-    <button>Buscar</button>
-    <table>
-      <tr>
-        <th style="width: 25%;">Identificação</th>
-        <th style="width: 50%;">Descrição</th>
-        <th style="width: 25%;">Data de Criação</th>
-      </tr>
-      <tr>
-        <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
-        <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-        <td>15/04/2025 08:49:31 <a href="#">Visualizar</a></td>
-      </tr>
-    </table>
-  </div>
+    <div class="header">TOTVS - Certificado de Emissão de Relatórios</div>
+    
+    <div class="content">
+        <div class="campo">
+            Informe a identificação do relatório:<br>
+            <span class="identificacao">2800x600-7449-486x-affb-9726/7458X742</span>
+        </div>
+        
+        <div class="campo">
+            Descrição:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data de Criação:
+        </div>
+        
+        <div class="detalhes">
+            MANTENDA/TESTAMENTO:<br>
+            UNIDECA, BVI 1 - DECLARAÇÃO DE MATRÍCULA 2ª VA - SECRETARIA (ADILIS) NOME 1544/2023 48:49:31 | Zirandau/
+        </div>
+    </div>
 </body>
 </html>
