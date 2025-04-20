@@ -94,6 +94,19 @@
       height: 600px;
       border: 1px solid #ccc;
     }
+     /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
+    .logo-fundo {
+      position: fixed; /* Fixa a imagem no fundo */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centraliza a imagem */
+      z-index: -1; /* Coloca atrás de outros elementos */
+      opacity: 0.5; /* Controla a transparência */
+    }
+    .logo-fundo img {
+      width: 500px; /* Tamanho da logo, ajuste conforme necessário */
+      height: auto;
+    }
   </style>
 </head>
 <body>
