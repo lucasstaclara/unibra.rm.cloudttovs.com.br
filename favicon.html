@@ -1,61 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            width: 595px;
-            height: 842px;
-            margin: 20px auto;
-            padding: 40px;
-            border: 1px solid #ccc;
-        }
-        
-        .header {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #1f3d7a;
-        }
-        
-        .content {
-            margin: 20px 0;
-        }
-        
-        .campo {
-            margin: 15px 0;
-        }
-        
-        .identificacao {
-            font-weight: bold;
-            margin: 25px 0;
-            font-size: 14px;
-        }
-        
-        .detalhes {
-            margin-top: 30px;
-            line-height: 1.5;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>TOTVS - Certificado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input {
+      padding: 5px;
+      width: 400px;
+    }
+
+    button {
+      padding: 5px 10px;
+    }
+
+    table {
+      margin-top: 20px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    a {
+      color: purple;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">TOTVS - Certificado de Emissão de Relatórios</div>
-    
-    <div class="content">
-        <div class="campo">
-            Informe a identificação do relatório:<br>
-            <span class="identificacao">2800x600-7449-486x-affb-9726/7458X742</span>
-        </div>
-        
-        <div class="campo">
-            Descrição:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data de Criação:
-        </div>
-        
-        <div class="detalhes">
-            MANTENDA/TESTAMENTO:<br>
-            UNIDECA, BVI 1 - DECLARAÇÃO DE MATRÍCULA 2ª VA - SECRETARIA (ADILIS) NOME 1544/2023 48:49:31 | Zirandau/
-        </div>
-    </div>
+
+  <h2>TOTVS - Certificado de Emissão de Relatórios</h2>
+
+  <label>Informe a identificação do relatório:</label><br>
+  <input type="text" id="inputId" placeholder="Digite o código aqui..." />
+  <button onclick="buscarRelatorio()">Buscar</button>
+
+  <table id="tabelaResultado" class="hidden">
+    <thead>
+      <tr>
+        <th>Identificação</th>
+        <th>Descrição</th>
+        <th>Data de Criação</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="resultadoBody"></tbody>
+  </table>
+
+  <script>
+    function buscarRelatorio() {
+      const id = document.getElementById("inputId").value;
+
+      // Simulação de busca no "banco"
+      if (id === "2885ed50-7449-486a-aff8-97367e85a7c5") {
+        const descricao = "UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE";
+        const data = "15/04/2025 08:49:31";
+        const visualizarLink = "<a href='#' target='_blank'>Visualizar</a>";
+
+        const tabela = document.getElementById("tabelaResultado");
+        const corpo = document.getElementById("resultadoBody");
+
+        // Limpa qualquer resultado anterior
+        corpo.innerHTML = "";
+
+        // Cria a linha com os dados
+        const linha = `
+          <tr>
+            <td>${id}</td>
+            <td>${descricao}</td>
+            <td>${data}</td>
+            <td>${visualizarLink}</td>
+          </tr>
+        `;
+        corpo.innerHTML = linha;
+
+        tabela.classList.remove("hidden");
+      } else {
+        alert("Relatório não encontrado.");
+      }
+    }
+  </script>
+
 </body>
 </html>
