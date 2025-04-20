@@ -2,31 +2,41 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>TOTVS - Certificado</title>
+  <title>TOTVS - Certificado de Emissão de Relatórios</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
       padding: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
     }
 
-    input {
-      padding: 5px;
-      width: 400px;
+    h1 {
+      font-size: 16px;
+      margin-bottom: 10px;
     }
 
-    button {
-      padding: 5px 10px;
+    label, input, button {
+      font-size: 12px;
     }
 
     table {
-      margin-top: 20px;
-      width: 100%;
+      width: 45%;
       border-collapse: collapse;
+      font-size: 9px;
+      margin-top: 10px;
     }
 
     th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
+      border: 1px solid #aaa;
+      padding: 1px 3px;
       text-align: left;
     }
 
@@ -34,73 +44,29 @@
       background-color: #ddd;
     }
 
-    .hidden {
-      display: none;
-    }
-
     a {
-      color: purple;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      font-size: 9px;
     }
   </style>
 </head>
 <body>
-
-  <h2>TOTVS - Certificado de Emissão de Relatórios</h2>
-
-  <label>Informe a identificação do relatório:</label><br>
-  <input type="text" id="inputId" placeholder="Digite o código aqui..." />
-  <button onclick="buscarRelatorio()">Buscar</button>
-
-  <table id="tabelaResultado" class="hidden">
-    <thead>
+  <div class="container">
+    <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+    <label for="relatorio">Informe a identificação do relatório:</label>
+    <input type="text" id="relatorio" name="relatorio" value="2885ed50-7449-486a-aff8-97367e85a7c5">
+    <button>Buscar</button>
+    <table>
       <tr>
-        <th>Identificação</th>
-        <th>Descrição</th>
-        <th>Data de Criação</th>
-        <th></th>
+        <th style="width: 25%;">Identificação</th>
+        <th style="width: 50%;">Descrição</th>
+        <th style="width: 25%;">Data de Criação</th>
       </tr>
-    </thead>
-    <tbody id="resultadoBody"></tbody>
-  </table>
-
-  <script>
-    function buscarRelatorio() {
-      const id = document.getElementById("inputId").value;
-
-      // Simulação de busca no "banco"
-      if (id === "2885ed50-7449-486a-aff8-97367e85a7c5") {
-        const descricao = "UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE";
-        const data = "15/04/2025 08:49:31";
-        const visualizarLink = "<a href='#' target='_blank'>Visualizar</a>";
-
-        const tabela = document.getElementById("tabelaResultado");
-        const corpo = document.getElementById("resultadoBody");
-
-        // Limpa qualquer resultado anterior
-        corpo.innerHTML = "";
-
-        // Cria a linha com os dados
-        const linha = `
-          <tr>
-            <td>${id}</td>
-            <td>${descricao}</td>
-            <td>${data}</td>
-            <td>${visualizarLink}</td>
-          </tr>
-        `;
-        corpo.innerHTML = linha;
-
-        tabela.classList.remove("hidden");
-      } else {
-        alert("Relatório não encontrado.");
-      }
-    }
-  </script>
-
+      <tr>
+        <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
+        <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+        <td>15/04/2025 08:49:31 <a href="#">Visualizar</a></td>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>
