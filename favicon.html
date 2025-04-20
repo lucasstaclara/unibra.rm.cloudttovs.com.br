@@ -42,18 +42,70 @@
     button {
       font-size: 12px;
       padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 45%;
+      border-collapse: collapse;
+      font-size: 9px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    th, td {
+      border: 1px solid #aaa;
+      padding: 1px 3px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ddd;
+    }
+
+    a {
+      font-size: 9px;
+      text-decoration: none;
+      color: blue;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-
+    
     <label for="relatorio">Informe a identificação do relatório:</label>
     <div class="search-bar">
       <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
-      <button>Buscar</button>
+      <button onclick="buscarRelatorio()">Buscar</button>
     </div>
+
+    <table id="report-table">
+      <tr>
+        <th style="width: 25%;">Identificação</th>
+        <th style="width: 50%;">Descrição</th>
+        <th style="width: 25%;">Data de Criação</th>
+      </tr>
+      <tr>
+        <td id="identificacao"></td>
+        <td id="descricao"></td>
+        <td id="data-criacao"><a href="#">Visualizar</a></td>
+      </tr>
+    </table>
   </div>
+
+  <script>
+    function buscarRelatorio() {
+      const reportId = document.getElementById('relatorio').value;
+      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+        document.getElementById('identificacao').textContent = reportId;
+        document.getElementById('descricao').textContent = 'UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE';
+        document.getElementById('data-criacao').textContent = '15/04/2025 08:49:31';
+        document.getElementById('report-table').style.display = 'table';
+      } else {
+        alert('Relatório não encontrado.');
+      }
+    }
+  </script>
 </body>
 </html>
