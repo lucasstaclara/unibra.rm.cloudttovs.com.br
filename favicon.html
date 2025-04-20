@@ -2,129 +2,54 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UNIBRA - Certificado de Emissão de Relatórios</title>
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="loader">
-    <img src="Load2.png" alt="Logo UNIBRA" class="logo">
-  </div>
-
-  <script src="script.js"></script>
-  
-  <title>unibra.rm.cloudtotvs.com.br/Corpore.Net/Source/Rpt-GeradorRelatoriosNet/RM.Rpt.Reports/Anonymous/RptFindReportByGuid.aspx</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Estilos do carregamento e outros elementos */
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
-    body {
-      font-family: Arial, sans-serif;
+    .logo {
+      width: 150px;
     }
 
     h1 {
-      font-size: 14px; /* Reduzido */
-      font-weight: bold;
-      margin: 15px 0 8px 8px; /* Ajustado */
-    }
-
-    label {
-      display: block;
-      font-size: 12px; /* Reduzido */
-      margin-left: 8px; /* Ajustado */
+      text-align: center;
+      font-size: 24px;
     }
 
     .buscador {
-      margin: 5px 0 0 8px; /* Ajustado */
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
     }
 
-    input[type="text"] {
-      width: 400px; /* Reduzido */
-      padding: 2px 4px;
-      font-size: 11px; /* Reduzido */
-      border: 1px solid #aaa;
-      border-radius: 2px;
-      height: 20px; /* Reduzido */
+    .buscador input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
     }
 
-    button {
-      padding: 2px 8px; /* Reduzido */
-      font-size: 11px; /* Reduzido */
-      margin-left: 5px;
-      border: 1px solid #999;
-      border-radius: 3px;
-      background-color: #f5f5f5;
+    .buscador button {
+      padding: 10px;
+      font-size: 16px;
+      margin-left: 10px;
       cursor: pointer;
-      height: 22px; /* Ajustado */
     }
 
-    button:hover {
-      background-color: #e0e0e0;
-    }
-
-    #resultado {
-      margin: 15px 8px;
-      font-size: 12px; /* Reduzido */
-      color: #333;
-      display: none;
-    }
-
-    #pdf-container {
-      margin: 15px 8px 60px 8px; /* Aumentada margem inferior para não sobrepor */
-      display: none;
-    }
-
-    iframe {
-      width: 45%;
-      height: 800px; /* Ajustado */
-      border: 1px solid #ccc;
-      margin-bottom: 60px; /* Adicionado para garantir espaço abaixo do PDF */
-    }
-
-    .rodape {
-      margin-top: 30px;
-      padding: 8px;
-      font-size: 16px; /* Reduzido */
-      color: #777;
-      text-align: center;
-      border-top: 1px solid #ddd;
-      display: none;
-    }
-
-    .carimbo {
-      margin-top: 10px;
-      font-size: 10px; /* Reduzido */
-      font-style: italic;
-      color: #555;
-      text-align: center;
-      display: none;
-    }
-
-    /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
-    .logo-fundo {
-      position: fixed; /* Fixa a imagem no fundo */
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); /* Centraliza a imagem */
-      z-index: -1; /* Coloca atrás de outros elementos */
-      opacity: 0.5; /* Controla a transparência */
-    }
-
-    .logo-fundo img {
-      width: 500px; /* Tamanho da logo, ajuste conforme necessário */
-      height: auto;
-    }
-
-    /* Tabela de Relatórios */
+    /* Tabela */
     #report-table {
       width: 100%;
       border-collapse: collapse;
@@ -138,22 +63,50 @@
       text-align: left;
     }
 
-    #report-table th {
-      background-color: #f2f2f2;
-    }
-
+    /* Mensagem de erro */
     #mensagem-erro {
       color: red;
       font-size: 14px;
-      margin-top: 10px;
       display: none;
+    }
+
+    /* PDF Container */
+    #pdf-container {
+      display: none;
+      text-align: center;
+    }
+
+    #pdf-viewer {
+      width: 80%;
+      height: 600px;
+      border: none;
+    }
+
+    /* Rodapé */
+    .carimbo {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .rodape {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+    }
+
+    /* Mensagem de resultado */
+    #resultado {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
-  <div class="logo-fundo">
-    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
+  <div class="loader">
+    <img src="Load2.png" alt="Logo UNIBRA" class="logo">
   </div>
 
   <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
@@ -163,16 +116,7 @@
     <button onclick="buscarRelatorio()">Buscar</button>
   </div>
 
-  <div id="resultado"></div>
-  <div id="pdf-container">
-    <iframe id="pdf-viewer" src=""></iframe>
-  </div>
-
-  <div class="carimbo">
-    Documento gerado automaticamente em ambiente seguro.
-  </div>
-
-  <!-- Tabela de Relatórios -->
+  <!-- Tabela de Detalhes do Relatório -->
   <table id="report-table">
     <tr>
       <th style="width: 30%;">Identificação</th>
@@ -186,16 +130,23 @@
     </tr>
   </table>
 
-  <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
+  <div id="resultado"></div>
+  <div id="pdf-container" style="display: none;">
+    <iframe id="pdf-viewer" src=""></iframe>
+  </div>
+
+  <div class="carimbo" style="display: none;">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
 
   <!-- Rodapé institucional (inicialmente oculto) -->
-  <footer class="rodape" id="rodape">
+  <footer class="rodape" id="rodape" style="display: none;">
     UNIBRA 2025 © Todos os direitos reservados.
   </footer>
 
   <script>
     function buscarRelatorio() {
-      const reportId = document.getElementById('relatorio').value;
+      const valor = document.getElementById('relatorio').value.trim();
       const resultado = document.getElementById('resultado');
       const pdfContainer = document.getElementById('pdf-container');
       const pdfViewer = document.getElementById('pdf-viewer');
@@ -214,7 +165,7 @@
         return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
       }
 
-      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+      if (valor === '2885ed50-7449-486a-aff8-97367e85a7c5') {
         const dataHoraAtual = formatarDataHora();
         resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
         resultado.style.display = 'block';
@@ -222,15 +173,15 @@
         pdfContainer.style.display = 'block';
         rodape.style.display = 'block';
         carimbo.style.display = 'block';
-        tabela.style.display = 'table';
-        mensagemErro.style.display = 'none';
-      } else if (reportId === '') {
+        tabela.style.display = 'table'; // Exibe a tabela
+        mensagemErro.style.display = 'none'; // Oculta a mensagem de erro
+      } else if (valor === '') {
         resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
         resultado.style.display = 'block';
         pdfContainer.style.display = 'none';
         rodape.style.display = 'none';
         carimbo.style.display = 'none';
-        tabela.style.display = 'none';
+        tabela.style.display = 'none'; // Oculta a tabela
         mensagemErro.style.display = 'none';
       } else {
         resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
@@ -238,8 +189,8 @@
         pdfContainer.style.display = 'none';
         rodape.style.display = 'none';
         carimbo.style.display = 'none';
-        tabela.style.display = 'none';
-        mensagemErro.style.display = 'block';
+        tabela.style.display = 'none'; // Oculta a tabela
+        mensagemErro.style.display = 'block'; // Exibe a mensagem de erro
       }
     }
 
