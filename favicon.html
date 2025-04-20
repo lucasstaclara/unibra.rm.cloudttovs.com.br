@@ -10,6 +10,33 @@
       padding: 0;
     }
 
+    /* Loader */
+    .loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .conteudo {
+      display: none;
+    }
+
     .container {
       position: absolute;
       top: 10px;
@@ -94,57 +121,67 @@
       height: 600px;
       border: 1px solid #ccc;
       position: relative;
-      z-index: 1; /* Garante que fique acima da marca d’água */
-      background-color: white; /* Evita transparência no PDF */
+      z-index: 1;
+      background-color: white;
     }
-     /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
+
     .logo-fundo {
-      position: fixed; /* Fixa a imagem no fundo */
+      position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); /* Centraliza a imagem */
-      z-index: -1; /* Coloca atrás de outros elementos */
-      opacity: 0.5; /* Controla a transparência */
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.5;
     }
+
     .logo-fundo img {
-      width: 200px; /* Tamanho da logo, ajuste conforme necessário */
+      width: 200px;
       height: auto;
     }
   </style>
 </head>
 <body>
-   <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
-  <div class="logo-fundo">
-    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
-  </div>
-  
-  <div class="container">
-    <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
 
-    <label for="relatorio">Informe a identificação do relatório:</label>
-    <div class="search-bar">
-      <input type="text" id="relatorio" name="relatorio" placeholder="">
-      <button onclick="buscarRelatorio()">Buscar</button>
+  <!-- Loader -->
+  <div class="loader">
+    <img src="Load2.png" alt="Logo de Carregamento" class="logo">
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="conteudo">
+    <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
+    <div class="logo-fundo">
+      <img src="LOGOUNIBRA.png" alt="Logo Unibra">
     </div>
 
-    <div id="loading">Carregando relatório...</div>
-    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
+    <div class="container">
+      <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
 
-    <table id="report-table">
-      <tr>
-        <th style="width: 30%;">Identificação</th>
-        <th style="width: 50%;">Descrição</th>
-        <th style="width: 20%;">Data de Criação</th>
-      </tr>
-      <tr>
-        <td id="identificacao">2885ed50-7449-486a-aff8-97367e85a7c1</td>
-        <td id="descricao">UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-        <td id="data-criacao">17/04/2025 19:14:31</td>
-      </tr>
-    </table>
+      <label for="relatorio">Informe a identificação do relatório:</label>
+      <div class="search-bar">
+        <input type="text" id="relatorio" name="relatorio" placeholder="">
+        <button onclick="buscarRelatorio()">Buscar</button>
+      </div>
 
-    <div id="pdf-container">
-      <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
+      <div id="loading">Carregando relatório...</div>
+      <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
+
+      <table id="report-table">
+        <tr>
+          <th style="width: 30%;">Identificação</th>
+          <th style="width: 50%;">Descrição</th>
+          <th style="width: 20%;">Data de Criação</th>
+        </tr>
+        <tr>
+          <td id="identificacao">2885ed50-7449-486a-aff8-97367e85a7c1</td>
+          <td id="descricao">UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+          <td id="data-criacao">17/04/2025 19:14:31</td>
+        </tr>
+      </table>
+
+      <div id="pdf-container">
+        <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
+      </div>
     </div>
   </div>
 
@@ -166,6 +203,12 @@
     }
 
     window.onload = function () {
+      // Esconde o loader e mostra o conteúdo após 2 segundos
+      setTimeout(() => {
+        document.querySelector('.loader').style.display = 'none';
+        document.querySelector('.conteudo').style.display = 'block';
+      }, 2000);
+
       const reportId = localStorage.getItem('reportBuscado');
       const tabela = document.getElementById('report-table');
       const mensagemErro = document.getElementById('mensagem-erro');
@@ -178,7 +221,7 @@
         if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c1') {
           tabela.style.display = 'table';
           pdfContainer.style.display = 'block';
-          pdfFrame.src = 'DeclaracaoLucasSantaClara.pdf'; // <- Substitua por seu link real!
+          pdfFrame.src = 'DeclaracaoLucasSantaClara.pdf';
         } else {
           mensagemErro.style.display = 'block';
         }
