@@ -2,6 +2,16 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <title>UNIBRA - Certificado de Emissão de Relatórios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loader">
+    <img src="Load2.png" alt="Logo UNIBRA" class="logo">
+  </div>
+
+  <script src="script.js"></script>
+  
   <title>unibra.rm.cloudtotvs.com.br/Corpore.Net/Source/Rpt-GeradorRelatoriosNet/RM.Rpt.Reports/Anonymous/RptFindReportByGuid.aspx</title>
 
   <!-- Favicon -->
@@ -22,39 +32,39 @@
     }
 
     h1 {
-      font-size: 14px;
+      font-size: 14px; /* Reduzido */
       font-weight: bold;
-      margin: 15px 0 8px 8px;
+      margin: 15px 0 8px 8px; /* Ajustado */
     }
 
     label {
       display: block;
-      font-size: 12px;
-      margin-left: 8px;
+      font-size: 12px; /* Reduzido */
+      margin-left: 8px; /* Ajustado */
     }
 
     .buscador {
-      margin: 5px 0 0 8px;
+      margin: 5px 0 0 8px; /* Ajustado */
     }
 
     input[type="text"] {
-      width: 400px;
+      width: 400px; /* Reduzido */
       padding: 2px 4px;
-      font-size: 11px;
+      font-size: 11px; /* Reduzido */
       border: 1px solid #aaa;
       border-radius: 2px;
-      height: 20px;
+      height: 20px; /* Reduzido */
     }
 
     button {
-      padding: 2px 8px;
-      font-size: 11px;
+      padding: 2px 8px; /* Reduzido */
+      font-size: 11px; /* Reduzido */
       margin-left: 5px;
       border: 1px solid #999;
       border-radius: 3px;
       background-color: #f5f5f5;
       cursor: pointer;
-      height: 22px;
+      height: 22px; /* Ajustado */
     }
 
     button:hover {
@@ -63,27 +73,27 @@
 
     #resultado {
       margin: 15px 8px;
-      font-size: 12px;
+      font-size: 12px; /* Reduzido */
       color: #333;
       display: none;
     }
 
     #pdf-container {
-      margin: 15px 8px 60px 8px;
+      margin: 15px 8px 60px 8px; /* Aumentada margem inferior para não sobrepor */
       display: none;
     }
 
     iframe {
       width: 45%;
-      height: 800px;
+      height: 800px; /* Ajustado */
       border: 1px solid #ccc;
-      margin-bottom: 60px;
+      margin-bottom: 60px; /* Adicionado para garantir espaço abaixo do PDF */
     }
 
     .rodape {
       margin-top: 30px;
       padding: 8px;
-      font-size: 16px;
+      font-size: 16px; /* Reduzido */
       color: #777;
       text-align: center;
       border-top: 1px solid #ddd;
@@ -92,7 +102,7 @@
 
     .carimbo {
       margin-top: 10px;
-      font-size: 10px;
+      font-size: 10px; /* Reduzido */
       font-style: italic;
       color: #555;
       text-align: center;
@@ -101,49 +111,43 @@
 
     /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
     .logo-fundo {
-      position: fixed;
+      position: fixed; /* Fixa a imagem no fundo */
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      opacity: 0.5;
+      transform: translate(-50%, -50%); /* Centraliza a imagem */
+      z-index: -1; /* Coloca atrás de outros elementos */
+      opacity: 0.5; /* Controla a transparência */
     }
 
     .logo-fundo img {
-      width: 500px;
+      width: 500px; /* Tamanho da logo, ajuste conforme necessário */
       height: auto;
     }
 
-    /* Tabela de resultados */
+    /* Tabela de Relatórios */
     #report-table {
-      margin-top: 20px;
       width: 100%;
       border-collapse: collapse;
+      margin-top: 20px;
       display: none;
     }
 
     #report-table th, #report-table td {
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
     }
 
     #report-table th {
-      background-color: #f0f0f0;
+      background-color: #f2f2f2;
     }
 
-    /* Estilos do loading */
-    #loading {
+    #mensagem-erro {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
       display: none;
-      text-align: center;
-      margin-top: 20px;
     }
-
-    #loading img {
-      width: 50px;
-      height: 50px;
-    }
-
   </style>
 </head>
 <body>
@@ -159,13 +163,16 @@
     <button onclick="buscarRelatorio()">Buscar</button>
   </div>
 
-  <!-- Loading -->
-  <div id="loading">
-    <img src="loading.gif" alt="Carregando...">
-    <p>Carregando...</p>
+  <div id="resultado"></div>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
   </div>
 
-  <!-- Tabela de resultados -->
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
+  <!-- Tabela de Relatórios -->
   <table id="report-table">
     <tr>
       <th style="width: 30%;">Identificação</th>
@@ -179,14 +186,7 @@
     </tr>
   </table>
 
-  <div id="resultado"></div>
-  <div id="pdf-container">
-    <iframe id="pdf-viewer" src=""></iframe>
-  </div>
-
-  <div class="carimbo">
-    Documento gerado automaticamente em ambiente seguro.
-  </div>
+  <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
 
   <!-- Rodapé institucional (inicialmente oculto) -->
   <footer class="rodape" id="rodape">
@@ -195,63 +195,52 @@
 
   <script>
     function buscarRelatorio() {
-      const valor = document.getElementById('relatorio').value.trim();
+      const reportId = document.getElementById('relatorio').value;
       const resultado = document.getElementById('resultado');
-      const tabela = document.getElementById('report-table');
       const pdfContainer = document.getElementById('pdf-container');
       const pdfViewer = document.getElementById('pdf-viewer');
       const rodape = document.getElementById('rodape');
       const carimbo = document.querySelector('.carimbo');
-      const loading = document.getElementById('loading');
+      const tabela = document.getElementById('report-table');
+      const mensagemErro = document.getElementById('mensagem-erro');
 
-      // Exibir o loading
-      loading.style.display = 'block';
-      tabela.style.display = 'none';
-      resultado.style.display = 'none';
-      pdfContainer.style.display = 'none';
-      rodape.style.display = 'none';
-      carimbo.style.display = 'none';
+      function formatarDataHora() {
+        const now = new Date();
+        const dia = String(now.getDate()).padStart(2, '0');
+        const mes = String(now.getMonth() + 1).padStart(2, '0');
+        const ano = now.getFullYear();
+        const hora = String(now.getHours()).padStart(2, '0');
+        const minuto = String(now.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+      }
 
-      // Simula o delay da busca
-      setTimeout(() => {
-        if (valor === '2885ed50-7449-486a-aff8-97367e85a7c5') {
-          // Exibe a tabela e o resultado da busca
-          tabela.style.display = 'table';
-          resultado.innerHTML = `<p><strong>Emissão concluída em ${formatarDataHora()}. Status: Aprovado.</strong></p>`;
-          resultado.style.display = 'block';
-          pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
-          pdfContainer.style.display = 'block';
-          rodape.style.display = 'block';
-          carimbo.style.display = 'block';
-        } else if (valor === '') {
-          resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
-          resultado.style.display = 'block';
-          pdfContainer.style.display = 'none';
-          rodape.style.display = 'none';
-          carimbo.style.display = 'none';
-          tabela.style.display = 'none';
-        } else {
-          resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
-          resultado.style.display = 'block';
-          pdfContainer.style.display = 'none';
-          rodape.style.display = 'none';
-          carimbo.style.display = 'none';
-          tabela.style.display = 'none';
-        }
-
-        // Ocultar o loading após a simulação de busca
-        loading.style.display = 'none';
-      }, 1500); // Simula 1,5 segundos de espera
-    }
-
-    function formatarDataHora() {
-      const now = new Date();
-      const dia = String(now.getDate()).padStart(2, '0');
-      const mes = String(now.getMonth() + 1).padStart(2, '0');
-      const ano = now.getFullYear();
-      const hora = String(now.getHours()).padStart(2, '0');
-      const minuto = String(now.getMinutes()).padStart(2, '0');
-      return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+        const dataHoraAtual = formatarDataHora();
+        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
+        resultado.style.display = 'block';
+        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
+        pdfContainer.style.display = 'block';
+        rodape.style.display = 'block';
+        carimbo.style.display = 'block';
+        tabela.style.display = 'table';
+        mensagemErro.style.display = 'none';
+      } else if (reportId === '') {
+        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
+        resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
+        tabela.style.display = 'none';
+        mensagemErro.style.display = 'none';
+      } else {
+        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
+        resultado.style.display = 'block';
+        pdfContainer.style.display = 'none';
+        rodape.style.display = 'none';
+        carimbo.style.display = 'none';
+        tabela.style.display = 'none';
+        mensagemErro.style.display = 'block';
+      }
     }
 
     // Permitir Enter no campo de texto
