@@ -2,130 +2,142 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>TOTVS - Certificado de Emissão de Relatórios</title>
+  <title>UNIBRA - Certificado de Emissão de Relatórios</title>
+  <link rel="stylesheet" href="style.css">
+  <title>unibra.rm.cloudtotvs.com.br/Corpore.Net/Source/Rpt-GeradorRelatoriosNet/RM.Rpt.Reports/Anonymous/RptFindReportByGuid.aspx</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
-
-    h1 {
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    label {
-      font-size: 12px;
-      display: block;
-      margin-bottom: 3px;
-    }
-
-    input {
-      font-size: 12px;
-      padding: 5px;
-      width: 360px;
-      height: 6px;
-    }
-
-    button {
-      padding: 2px 8px;
-      font-size: 11px;
-      margin-left: 0px;
-      border: 1px solid #999;
-      border-radius: 3px;
-      background-color: #f5f5f5;
-      cursor: pointer;
-      height: 22px;
-    }
-
-    #mensagem-erro {
-      color: red;
-      font-size: 10px;
-      margin-top: 5px;
-      display: none;
-    }
-
+    /* ... (mantenha todos os estilos originais) ... */
+    
+    /* Novos estilos para a tabela */
     #report-table {
-      width: 500px;
+      width: 90%;
+      margin: 15px 8px;
       border-collapse: collapse;
-      font-size: 9px;
-      margin-top: 10px;
       display: none;
     }
-
-    th, td {
-      border: 1px solid #aaa;
-      padding: 2px;
-      text-align: center;
-      white-space: nowrap;
+    
+    #report-table th, #report-table td {
+      border: 1px solid #ddd;
+      padding: 6px;
+      text-align: left;
     }
-
-    th {
-      background-color: #ddd;
+    
+    #report-table th {
+      background-color: #f5f5f5;
+    }
+    
+    #mensagem-erro {
+      display: none;
+      color: #dc3545;
+      margin: 8px;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-    
-    <label for="relatorio">Informe a identificação do relatório:</label>
-    <div class="search-bar">
-      <input type="text" id="relatorio" name="relatorio" placeholder="Digite o código">
-      <button onclick="buscarRelatorio()">Buscar</button>
-    </div>
-
-    <div id="mensagem-erro">Nenhum relatório encontrado para a identificação informada.</div>
-
-    <table id="report-table">
-      <tr>
-        <th style="width: 30%;">Identificação</th>
-        <th style="width: 50%;">Descrição</th>
-        <th style="width: 20%;">Data de Criação</th>
-      </tr>
-      <tr>
-        <td id="identificacao"></td>
-        <td id="descricao"></td>
-        <td id="data-criacao"></td>
-      </tr>
-    </table>
+  <!-- LOGO COMO MARCA D'ÁGUA NO FUNDO -->
+  <div class="logo-fundo">
+    <img src="LOGOUNIBRA.png" alt="Logo Unibra">
   </div>
 
+  <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
+  <label for="relatorio">Informe a identificação do relatório:</label>
+  <div class="buscador">
+    <input type="text" id="relatorio" name="relatorio" />
+    <button onclick="buscarRelatorio()">Buscar</button>
+  </div>
+
+  <div id="mensagem-erro"></div>
+
+  <table id="report-table">
+    <tr>
+      <th style="width: 30%;">Identificação</th>
+      <th style="width: 50%;">Descrição</th>
+      <th style="width: 20%;">Data de Criação</th>
+    </tr>
+    <tr>
+      <td id="identificacao">2885ed50-7449-486a-aff8-97367e85a7c5</td>
+      <td id="descricao">UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+      <td id="data-criacao">15/04/2025 08:49:31</td>
+    </tr>
+  </table>
+
+  <div id="resultado"></div>
+  <div id="pdf-container">
+    <iframe id="pdf-viewer" src=""></iframe>
+  </div>
+
+  <div class="carimbo">
+    Documento gerado automaticamente em ambiente seguro.
+  </div>
+
+  <!-- Rodapé institucional (inicialmente oculto) -->
+  <footer class="rodape" id="rodape">
+    UNIBRA 2025 © Todos os direitos reservados.
+  </footer>
+
   <script>
+    function formatarDataHora() {
+      const now = new Date();
+      const dia = String(now.getDate()).padStart(2, '0');
+      const mes = String(now.getMonth() + 1).padStart(2, '0');
+      const ano = now.getFullYear();
+      const hora = String(now.getHours()).padStart(2, '0');
+      const minuto = String(now.getMinutes()).padStart(2, '0');
+      return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+    }
+
     function buscarRelatorio() {
-      const reportId = document.getElementById('relatorio').value;
+      const reportId = document.getElementById('relatorio').value.trim();
       const mensagemErro = document.getElementById('mensagem-erro');
       const tabela = document.getElementById('report-table');
-      
-      const identificacao = document.getElementById('identificacao');
-      const descricao = document.getElementById('descricao');
-      const dataCriacao = document.getElementById('data-criacao');
+      const resultado = document.getElementById('resultado');
+      const pdfContainer = document.getElementById('pdf-container');
+      const pdfViewer = document.getElementById('pdf-viewer');
+      const rodape = document.getElementById('rodape');
+      const carimbo = document.querySelector('.carimbo');
 
-      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
-        identificacao.textContent = reportId;
-        descricao.textContent = "UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE";
-        dataCriacao.textContent = "15/04/2025 08:49:31";
+      // Resetar todos os elementos
+      mensagemErro.style.display = 'none';
+      tabela.style.display = 'none';
+      resultado.style.display = 'none';
+      pdfContainer.style.display = 'none';
+      rodape.style.display = 'none';
+      carimbo.style.display = 'none';
 
+      if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c1') {
+        // Caso do PDF
+        const dataHoraAtual = formatarDataHora();
+        resultado.innerHTML = `<p><strong>Emissão concluída em ${dataHoraAtual}. Status: Aprovado.</strong></p>`;
+        resultado.style.display = 'block';
+        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
+        pdfContainer.style.display = 'block';
+        rodape.style.display = 'block';
+        carimbo.style.display = 'block';
+      } else if (reportId === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+        // Caso da tabela
         tabela.style.display = 'table';
-        mensagemErro.style.display = 'none';
+      } else if (reportId === '') {
+        mensagemErro.textContent = 'Por favor, digite uma identificação.';
+        mensagemErro.style.display = 'block';
       } else {
-        tabela.style.display = 'none';
+        mensagemErro.textContent = 'Nenhum relatório encontrado para a identificação informada.';
         mensagemErro.style.display = 'block';
       }
     }
+
+    document.getElementById('relatorio').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        buscarRelatorio();
+      }
+    });
   </script>
 </body>
 </html>
