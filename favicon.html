@@ -6,75 +6,50 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      font-size: 13px;
-      margin: 20px;
+      padding: 20px;
     }
-
     h1 {
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
-
-    input[type="text"] {
-      width: 400px;
-      padding: 4px;
-      font-size: 13px;
+    label, input, button {
+      font-size: 12px;
     }
-
-    button {
-      padding: 4px 10px;
-      font-size: 13px;
-      margin-left: 4px;
-    }
-
     table {
-      width: 100%;
+      width: 80%;
       border-collapse: collapse;
-      margin-top: 15px;
+      font-size: 12px;
+      margin-top: 10px;
     }
-
     th, td {
-      border: 1px solid #ccc;
-      padding: 6px 10px;
+      border: 1px solid #aaa;
+      padding: 4px;
       text-align: left;
     }
-
     th {
-      background-color: #f0f0f0;
-      font-size: 13px;
+      background-color: #ddd;
     }
-
     a {
-      color: blue;
-      text-decoration: underline;
       font-size: 12px;
     }
   </style>
 </head>
 <body>
   <h1>TOTVS - Certificado de Emissão de Relatórios</h1>
-
-  <label for="identificacao">Informe a identificação do relatório:</label>
-  <input type="text" id="identificacao" value="2885ed50-7449-486a-aff8-97367e85a7c5">
+  <label for="relatorio">Informe a identificação do relatório:</label>
+  <input type="text" id="relatorio" name="relatorio" value="2885ed50-7449-486a-aff8-97367e85a7c5">
   <button>Buscar</button>
-
   <table>
-    <thead>
-      <tr>
-        <th style="width: 28%">Identificação</th>
-        <th style="width: 48%">Descrição</th>
-        <th style="width: 12%">Data de Criação</th>
-        <th style="width: 12%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
-        <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-        <td>15/04/2025 08:49:31</td>
-        <td><a href="#">Visualizar</a></td>
-      </tr>
-    </tbody>
+    <tr>
+      <th style="width: 30%;">Identificação</th>
+      <th style="width: 50%;">Descrição</th>
+      <th style="width: 20%;">Data de Criação</th>
+    </tr>
+    <tr>
+      <td><a href="#">2885ed50-7449-486a-aff8-97367e85a7c5</a></td>
+      <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+      <td>15/04/2025 08:49:31 <a href="#">Visualizar</a></td>
+    </tr>
   </table>
 </body>
 </html>
