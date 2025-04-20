@@ -22,39 +22,39 @@
     }
 
     h1 {
-      font-size: 14px; /* Reduzido */
+      font-size: 14px;
       font-weight: bold;
-      margin: 15px 0 8px 8px; /* Ajustado */
+      margin: 15px 0 8px 8px;
     }
 
     label {
       display: block;
-      font-size: 12px; /* Reduzido */
-      margin-left: 8px; /* Ajustado */
+      font-size: 12px;
+      margin-left: 8px;
     }
 
     .buscador {
-      margin: 5px 0 0 8px; /* Ajustado */
+      margin: 5px 0 0 8px;
     }
 
     input[type="text"] {
-      width: 400px; /* Reduzido */
+      width: 400px;
       padding: 2px 4px;
-      font-size: 11px; /* Reduzido */
+      font-size: 11px;
       border: 1px solid #aaa;
       border-radius: 2px;
-      height: 20px; /* Reduzido */
+      height: 20px;
     }
 
     button {
-      padding: 2px 8px; /* Reduzido */
-      font-size: 11px; /* Reduzido */
+      padding: 2px 8px;
+      font-size: 11px;
       margin-left: 5px;
       border: 1px solid #999;
       border-radius: 3px;
       background-color: #f5f5f5;
       cursor: pointer;
-      height: 22px; /* Ajustado */
+      height: 22px;
     }
 
     button:hover {
@@ -63,27 +63,27 @@
 
     #resultado {
       margin: 15px 8px;
-      font-size: 12px; /* Reduzido */
+      font-size: 12px;
       color: #333;
       display: none;
     }
 
     #pdf-container {
-      margin: 15px 8px 60px 8px; /* Aumentada margem inferior para não sobrepor */
+      margin: 15px 8px 60px 8px;
       display: none;
     }
 
     iframe {
       width: 45%;
-      height: 800px; /* Ajustado */
+      height: 800px;
       border: 1px solid #ccc;
-      margin-bottom: 60px; /* Adicionado para garantir espaço abaixo do PDF */
+      margin-bottom: 60px;
     }
 
     .rodape {
       margin-top: 30px;
       padding: 8px;
-      font-size: 16px; /* Reduzido */
+      font-size: 16px;
       color: #777;
       text-align: center;
       border-top: 1px solid #ddd;
@@ -92,7 +92,7 @@
 
     .carimbo {
       margin-top: 10px;
-      font-size: 10px; /* Reduzido */
+      font-size: 10px;
       font-style: italic;
       color: #555;
       text-align: center;
@@ -101,16 +101,16 @@
 
     /* LOGO COMO MARCA D'ÁGUA NO FUNDO */
     .logo-fundo {
-      position: fixed; /* Fixa a imagem no fundo */
+      position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); /* Centraliza a imagem */
-      z-index: -1; /* Coloca atrás de outros elementos */
-      opacity: 0.5; /* Controla a transparência */
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.5;
     }
 
     .logo-fundo img {
-      width: 500px; /* Tamanho da logo, ajuste conforme necessário */
+      width: 500px;
       height: auto;
     }
 
@@ -132,6 +132,18 @@
       background-color: #f0f0f0;
     }
 
+    /* Estilos do loading */
+    #loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #loading img {
+      width: 50px;
+      height: 50px;
+    }
+
   </style>
 </head>
 <body>
@@ -145,6 +157,12 @@
   <div class="buscador">
     <input type="text" id="relatorio" name="relatorio" />
     <button onclick="buscarRelatorio()">Buscar</button>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading">
+    <img src="loading.gif" alt="Carregando...">
+    <p>Carregando...</p>
   </div>
 
   <!-- Tabela de resultados -->
@@ -184,31 +202,46 @@
       const pdfViewer = document.getElementById('pdf-viewer');
       const rodape = document.getElementById('rodape');
       const carimbo = document.querySelector('.carimbo');
+      const loading = document.getElementById('loading');
 
-      if (valor === '2885ed50-7449-486a-aff8-97367e85a7c5') {
-        // Exibe a tabela e o resultado da busca
-        tabela.style.display = 'table';
-        resultado.innerHTML = `<p><strong>Emissão concluída em ${formatarDataHora()}. Status: Aprovado.</strong></p>`;
-        resultado.style.display = 'block';
-        pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
-        pdfContainer.style.display = 'block';
-        rodape.style.display = 'block';
-        carimbo.style.display = 'block';
-      } else if (valor === '') {
-        resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
-        resultado.style.display = 'block';
-        pdfContainer.style.display = 'none';
-        rodape.style.display = 'none';
-        carimbo.style.display = 'none';
-        tabela.style.display = 'none';
-      } else {
-        resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
-        resultado.style.display = 'block';
-        pdfContainer.style.display = 'none';
-        rodape.style.display = 'none';
-        carimbo.style.display = 'none';
-        tabela.style.display = 'none';
-      }
+      // Exibir o loading
+      loading.style.display = 'block';
+      tabela.style.display = 'none';
+      resultado.style.display = 'none';
+      pdfContainer.style.display = 'none';
+      rodape.style.display = 'none';
+      carimbo.style.display = 'none';
+
+      // Simula o delay da busca
+      setTimeout(() => {
+        if (valor === '2885ed50-7449-486a-aff8-97367e85a7c5') {
+          // Exibe a tabela e o resultado da busca
+          tabela.style.display = 'table';
+          resultado.innerHTML = `<p><strong>Emissão concluída em ${formatarDataHora()}. Status: Aprovado.</strong></p>`;
+          resultado.style.display = 'block';
+          pdfViewer.src = 'DeclaracaoLucasSantaClara.pdf';
+          pdfContainer.style.display = 'block';
+          rodape.style.display = 'block';
+          carimbo.style.display = 'block';
+        } else if (valor === '') {
+          resultado.innerHTML = "<p>Por favor, digite uma identificação.</p>";
+          resultado.style.display = 'block';
+          pdfContainer.style.display = 'none';
+          rodape.style.display = 'none';
+          carimbo.style.display = 'none';
+          tabela.style.display = 'none';
+        } else {
+          resultado.innerHTML = "<p>Nenhum relatório encontrado para a identificação informada.</p>";
+          resultado.style.display = 'block';
+          pdfContainer.style.display = 'none';
+          rodape.style.display = 'none';
+          carimbo.style.display = 'none';
+          tabela.style.display = 'none';
+        }
+
+        // Ocultar o loading após a simulação de busca
+        loading.style.display = 'none';
+      }, 1500); // Simula 1,5 segundos de espera
     }
 
     function formatarDataHora() {
