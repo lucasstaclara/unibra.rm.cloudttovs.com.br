@@ -1,53 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Tabela Estilizada 50%</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 50%; /* ocupa apenas metade da página */
-      table-layout: fixed;
-      font-family: Arial, sans-serif;
-      margin: 20px auto; /* centraliza a tabela na horizontal */
-    }
-
-    th, td {
-      border: 1px solid #aaa;
-      padding: 2px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    th {
-      background-color: #ddd;
-    }
-
-    a {
-      color: blue;
-      text-decoration: underline;
-      font-size: 13px;
-    }
-
-    a:visited {
-      color: purple;
-    }
-  </style>
-</head>
-<body>
-
-  <table id="report-table">
-    <tr>
-      <th style="width: 80%;">Identificação</th>
-      <th style="width: 80%;">Descrição</th>
-      <th style="width: 20%;">Data de Criação</th>
-    </tr>
-    <tr>
-      <td>2885ed50-7449-486a-aff8-97367e85a7c5</td>
-      <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
-      <td>15/04/2025 08:49:31</td>
-    </tr>
-  </table>
-
-</body>
-</html>
+<table>
+  <tr>
+    <th style="width: 30%;">Identificação</th>
+    <th style="width: 50%;">Descrição</th>
+    <th style="width: 20%;">Data de Criação</th>
+  </tr>
+  <tr>
+    <td>2885ed50-7449-486a-aff8-97367e85a7c5</td>
+    <td>UB.DECL.001.1 - DECLARAÇÃO DE MATRÍCULA 2ª Via - SECRETARIA (AGILIS).NONE</td>
+    <td>
+      15/04/2025 08:49:31
+      <a href="#" style="margin-left: 10px; color: blue; text-decoration: underline;">Visualizar</a>
+    </td>
+  </tr>
+</table>
